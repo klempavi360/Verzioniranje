@@ -39,4 +39,13 @@ def filtriraj_sobel_smer(slika):
 
 if __name__ == '__main__':    
     #učitamo našu testnu sliku
-    pass
+    slika = cv.imread(".utils/lenna.png", cv.IMREAD_GRAYSCALE)
+    
+    #filtriranje s gausovim jednom sa sigmom 1.5
+    	
+    #filtriranje sobel smer
+    
+    
+    
+    cv.waitKey(0)
+    cv.destroyAllWindows()
