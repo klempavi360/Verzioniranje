@@ -45,7 +45,10 @@ if __name__ == '__main__':
     slika_gausovo_jedro = filtriraj_z_gaussovim_jedrom(slika, 1.5)
     	
     #filtriranje sobel smer
+    slika_sobel_smer = filtriraj_sobel_smer(slika_gausovo_jedro)
     
+    
+    cv.imshow("Filter sobel smer", slika_sobel_smer)
     cv.imshow("Filter gausovo jedro", slika_gausovo_jedro)
     cv.waitKey(0)
     cv.destroyAllWindows()
