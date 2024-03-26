@@ -42,10 +42,10 @@ if __name__ == '__main__':
     slika = cv.imread(".utils/lenna.png", cv.IMREAD_GRAYSCALE)
     
     #filtriranje s gausovim jednom sa sigmom 1.5
+    slika_gausovo_jedro = filtriraj_z_gaussovim_jedrom(slika, 1.5)
     	
     #filtriranje sobel smer
     
-    
-    
+    cv.imshow("Filter gausovo jedro", slika_gausovo_jedro)
     cv.waitKey(0)
     cv.destroyAllWindows()
