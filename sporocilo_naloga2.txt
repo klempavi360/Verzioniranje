@@ -1,0 +1,6 @@
+1. Se pojavijo razlike pri detekciji robov nad zelo temno in zelo svetlo sliko pri uporabi detektorjev?
+Ja, pojavijo se razlike. Razlike so ka temne slike lahko majo niski kontrast kaj nam davle šibke robe, dok pa svetle slike zgubijo detalje robov.
+
+2. Zakaj je pred uporabo detektorja robov smiselno uporabiti filter za glajenje? Utemeljite s konkretnim primerom.
+Smisleno je jer zmanjšajo šumove in naredimo pomenembne spremembe pri intenzivnosti. Na primer če na sliki mamo nekšo sliko de pesek curi tej lahko z pomoću
+Gaussovog filtra odstranimo šum z slike in tej bodo naši robi glatkiši. Če so robi glatkiši tej naš detektor robov ima lažji posel ka zazna vse robe.
