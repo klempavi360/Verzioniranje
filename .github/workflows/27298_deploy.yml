@@ -30,6 +30,10 @@ jobs:
       - name: Debug Tagged Image
         run: sudo docker images
       
+      - name: Tag Docker Image
+        run: |
+          sudo docker tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date $DOCKER_USERNAME/$DOCKER_REPOSITORY:latest
+
       - name: Push Docker Picture
         run: |
-          sudo docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date
+          sudo docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:latest
