@@ -3,7 +3,7 @@ name: Deploy
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  DOCKER_REPOSITORY_NAME: ${{ secrets.DOCKER_REPOSITORY }}
+  DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
 
 on:
   workflow_run:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Login into Docker
         run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 
       - name: Current Time
         id: datum
@@ -26,9 +26,9 @@ jobs:
       - name: Create Docker picture
         run: |
           echo ${{ steps.datum.outputs.date }}
-          echo "docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:$date"
-          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:$date
+          echo "docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date"
+          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date
 
       - name: Push Docker Picture
         run: |
-          docker push $DOCKER_USERNAME/$REPONAME:$date
+          docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date
