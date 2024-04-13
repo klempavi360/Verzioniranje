@@ -1,0 +1,57 @@
+name: test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test_check:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check for test scripts
+        run: |
+          if [ -f test.py ]; then
+            echo "Test script found!"
+          else
+            echo "Error: No test script found!" >&2
+            exit 1
+          fi
+        shell: bash
+
+  test_run:
+    needs: test_check
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: python test.py
+
+      - name: Save error log
+        if: ${{ failure() }}
+        run: echo "$(<error.txt)" > error_log.txt
+
+      - name: Save test results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: error_log.txt
