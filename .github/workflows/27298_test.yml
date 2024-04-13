@@ -16,13 +16,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: main
         
       - name: Check for test scripts
         run: |
           if [ -f test.py ]; then
             echo "Test script found!"
           else
-            echo "Error: No test script found!" 
+            echo "Error: No test script found!" >&2
+            exit 1
           fi
 
   test_run:
