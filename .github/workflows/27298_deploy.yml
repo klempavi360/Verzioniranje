@@ -16,18 +16,17 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Login into Docker
-        run: |
-          echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
-
+        run: echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
+      
       - name: Current Time
-        id: date
+        id: datum
         run: echo "date=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
       
       - name: Create Docker picture
         run: |
           echo ${{ steps.datum.outputs.date }}
           sudo docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:${{ steps.datum.outputs.date }}
-
+      
       - name: Push Docker Picture
         run: |
           sudo docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:${{ steps.datum.outputs.date }}
