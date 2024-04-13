@@ -26,6 +26,9 @@ jobs:
         run: |
           echo ${{ steps.datum.outputs.date }}
           sudo echo "docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:$date"
+          
+      - name: Debug Tagged Image
+        run: sudo docker images
       
       - name: Push Docker Picture
         run: |
