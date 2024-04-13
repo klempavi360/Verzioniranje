@@ -20,7 +20,7 @@ jobs:
       
       - name: Current Time
         id: datum
-        run: echo "date=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
+        run: echo "date=$(date +'%Y-%m-%d--%H-%M-%S')" >> "$GITHUB_ENV"
       
       - name: Create Docker picture
         run: |
