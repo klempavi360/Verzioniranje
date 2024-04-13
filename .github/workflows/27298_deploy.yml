@@ -26,8 +26,7 @@ jobs:
       - name: Create Docker picture
         run: |
           echo ${{ steps.datum.outputs.date }}
-          echo "docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date"
-          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date
+          sudo docker build . --file Dockerfile --tag $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date
 
       - name: Push Docker Picture
         run: |
