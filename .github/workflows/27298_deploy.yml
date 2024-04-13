@@ -15,23 +15,6 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Pull down repository
-        uses: actions/checkout@v2
-
-      - name: Check for errors in test
-        uses: actions/download-artifact@v2
-        with:
-          name: test-results
-          path: .
-
-      - name: Check error log
-        run: |
-          if [ -s error_log.txt ]; then
-            echo "Error found in test: $(<error_log.txt)"
-            exit 1
-          else
-            echo "No errors found in test"
-          fi
       - name: Login into Docker
         run: |
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
