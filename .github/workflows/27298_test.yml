@@ -16,8 +16,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
       - name: Working directory
-        uses: pwd
+        run: pwd
+        
       - name: Check for test scripts
         run: |
           if [ -f test.py ]; then
