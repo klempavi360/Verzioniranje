@@ -1,4 +1,4 @@
-name: test
+name: Test
 
 on:
   push:
@@ -9,10 +9,6 @@ on:
 jobs:
   test_check:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        python-version: [3.8, 3.9]
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -31,6 +27,10 @@ jobs:
   test_run:
     needs: test_check
     runs-on: self-hosted
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
