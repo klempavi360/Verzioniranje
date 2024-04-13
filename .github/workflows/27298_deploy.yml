@@ -29,4 +29,4 @@ jobs:
       
       - name: Push Docker Picture
         run: |
-          sudo docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:${{ steps.datum.outputs.date }}
+          sudo docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:$date
